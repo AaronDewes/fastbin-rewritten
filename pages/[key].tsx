@@ -104,7 +104,7 @@ export async function getServerSideProps({ req, res, params }) {
     return { props: {} }; // We have to return something, or else Next.js will be mad.
   }
 
-  const baseUrl = env('site-url', true);
+  const baseUrl = env('site_url', true);
 
   const data = await fetch(`${baseUrl}/api/documents/${key}`, {
     headers: {
