@@ -105,6 +105,7 @@ export async function getServerSideProps({ req, res, params }) {
   }
 
   const baseUrl = env('site-url', true);
+  console.log(baseUrl);
 
   const data = await fetch(`${baseUrl}/api/documents/${key}`, {
     headers: {
