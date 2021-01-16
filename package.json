@@ -13,7 +13,7 @@
     "@geist-ui/react": "^2.1.0-canary.2",
     "@geist-ui/react-icons": "^1.0.1",
     "@monaco-editor/react": "^3.7.0",
-    "aws-sdk": "^2.799.0",
+    "aws-sdk": "^2.828.0",
     "cuid": "^2.1.8",
     "device": "^0.3.12",
     "firebase-admin": "^9.4.1",
