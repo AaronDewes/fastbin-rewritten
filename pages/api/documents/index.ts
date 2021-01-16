@@ -9,7 +9,7 @@ const storage = getStorageStrategy();
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: env('limits.max-payload-size') || '1mb'
+      sizeLimit: env('limits.max-payload-size') || '50kb'
     }
   }
 };
