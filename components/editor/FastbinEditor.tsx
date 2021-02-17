@@ -43,7 +43,7 @@ const FastbinEditor = ({ contents, readOnly, language, setContents }: EditorOpts
       language={language}
       value={contents}
       onChange={handleEditorChange}
-      theme="dark"
+      theme="vs-dark"
       wrapperClassName="editor"
       options={editorOptions}
     />

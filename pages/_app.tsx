@@ -51,7 +51,7 @@ const Fastbin = ({ Component, pageProps }) => {
     };
   }, []);
 
-  const [themeType] = useState('light');
+  const [themeType] = useState('dark');
   return (
     <GeistProvider themeType={themeType}>
       <CssBaseline />

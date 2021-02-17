@@ -1,11 +1,6 @@
 import AppTemplate from '@/components/AppTemplate';
-import { NavigationItem } from '@/components/the-header/TheHeader';
-import { Save } from '@geist-ui/react-icons';
 import FastbinEditor from '@/components/editor/FastbinEditor';
 import React, { useEffect, useRef, useState } from 'react';
-import upload from '@/lib/upload';
-import { useToasts } from '@geist-ui/react';
-import LoadingContainer from '@/components/loading-container/LoadingContainer';
 import Mousetrap from 'mousetrap';
 import globalKeyBind from '@/lib/globalKeyBind';
 import { useRouter } from 'next/router';
@@ -23,40 +18,10 @@ const EditorPage = ({ contents, languageId }: EditorPageProps) => {
     documentLanguageRef.current = l;
   };
 
-  const [uploading, setUploading] = useState(false);
-
   const documentContents = useRef(contents ?? '');
   const setDocumentContents = (c: string) => documentContents.current = c;
 
-  const [toasts, setToast] = useToasts();
   const router = useRouter();
-
-  const save = async () => {
-    if (uploading) {
-      return;
-    }
-
-    setUploading(true);
-
-    try {
-      const key = await upload(documentContents.current, documentLanguageRef.current);
-
-      setToast({
-        text: 'Snippet created successfully! Redirecting...',
-        type: 'success'
-      });
-
-      router.push(`/${key}`);
-    } catch (err) {
-      setUploading(false);
-
-      setToast({
-        text: `${err}`,
-        type: 'error'
-      });
-    }
-  };
-
 
   useEffect(() => {
     let mounted = true;
@@ -73,18 +38,13 @@ const EditorPage = ({ contents, languageId }: EditorPageProps) => {
   }, []);
 
   return (
-    <AppTemplate
-      displayLanguages
-      documentLanguage={documentLanguage}
-      setDocumentLanguage={setDocumentLanguage}
-    >
+    <AppTemplate>
       <FastbinEditor
         contents={documentContents.current}
         setContents={setDocumentContents}
         language={documentLanguage}
       />
 
-      {uploading && <LoadingContainer text="Creating snippet..." />}
     </AppTemplate>
   );
 };
