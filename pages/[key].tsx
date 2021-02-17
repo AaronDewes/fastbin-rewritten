@@ -1,8 +1,6 @@
 import AppTemplate from '@/components/AppTemplate';
-import { NavigationItem } from '@/components/the-header/TheHeader';
 import env from '@/lib/env';
 import languages from '@/lib/languages';
-import { Copy, Code, Trash2 } from '@geist-ui/react-icons';
 import FastbinEditor from '@/components/editor/FastbinEditor';
 import Mousetrap from 'mousetrap';
 import { useRouter } from 'next/router';
