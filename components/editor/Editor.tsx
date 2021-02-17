@@ -1,4 +1,4 @@
-import { Editor } from '@monaco-editor/react';
+import Editor from "@monaco-editor/react";
 import checkMobile from 'ismobilejs';
 import { useState, useEffect } from 'react';
 import MobileEditor from './MobileEditor';
