@@ -8,5 +8,4 @@ export default interface IStorageStrategy {
   get(key: string): Promise<string>;
   getStream(key: string);
   exists(key: string): Promise<boolean>;
-  delete(key: string): Promise<any>;
 }

@@ -39,19 +39,14 @@ const EditorPage = ({ contents, languageId }: EditorPageProps) => {
     setUploading(true);
 
     try {
-      const { key, secret } = await upload(documentContents.current, documentLanguageRef.current);
+      const key = await upload(documentContents.current, documentLanguageRef.current);
 
       setToast({
         text: 'Snippet created successfully! Redirecting...',
         type: 'success'
       });
 
-      router.push({
-        pathname: `/${key}`,
-        query: {
-          secret
-        }
-      }, `/${key}`);
+      router.push(`/${key}`);
     } catch (err) {
       setUploading(false);
 

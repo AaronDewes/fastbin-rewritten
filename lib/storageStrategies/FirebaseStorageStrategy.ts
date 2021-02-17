@@ -17,10 +17,6 @@ class FirebaseStorageStrategy implements IStorageStrategy {
   async exists(key: string) {
     return new Firebase().exists(key);
   }
-
-  async delete(key: string) {
-    return new Firebase().delete(key);
-  }
 }
 
 export default FirebaseStorageStrategy;

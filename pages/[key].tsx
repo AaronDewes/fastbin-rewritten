@@ -14,10 +14,9 @@ interface DocumentPageProps {
   finalKey: string;
   originalKey: string;
   languageId: string;
-  secret: string | null;
 }
 
-const DocumentPage = ({ contents, finalKey, originalKey, languageId, secret }: DocumentPageProps) => {
+const DocumentPage = ({ contents, finalKey, originalKey, languageId }: DocumentPageProps) => {
   const navigation: NavigationItem[] = [
     {
       tooltip: 'Clone (ctrl+shift+c)',
@@ -31,14 +30,6 @@ const DocumentPage = ({ contents, finalKey, originalKey, languageId, secret }: D
       icon: Code
     }
   ];
-
-  if (secret) {
-    navigation.push({
-      tooltip: 'Delete',
-      url: `/delete/${secret}`,
-      icon: Trash2
-    })
-  }
 
   const router = useRouter();
 
@@ -74,7 +65,7 @@ const DocumentPage = ({ contents, finalKey, originalKey, languageId, secret }: D
 
 export default DocumentPage;
 
-export async function getServerSideProps({ req, res, params, query }) {
+export async function getServerSideProps({ req, res, params }) {
   let key = params.key;
   let originalKey = key;
 
@@ -113,15 +104,12 @@ export async function getServerSideProps({ req, res, params, query }) {
 
   const contents = json.contents;
 
-  const secret: string | null = query.secret || null;
-
   return {
     props: {
       contents,
       finalKey: key,
       originalKey,
-      languageId,
-      secret
+      languageId
     }
   };
 };
