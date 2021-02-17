@@ -10,7 +10,7 @@ contact me on Telegram: t.me/AaronDewes
 
 const InternalServerError = () => {
   return (
-    <AppTemplate navigation={[]}>
+    <AppTemplate>
       <FastbinEditor
         language="markdown"
         contents={ERROR_PAGE}

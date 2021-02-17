@@ -6,7 +6,7 @@ import * as path from 'path';
 
 const About = ({ readme }: { readme: string }) => {
   return (
-    <AppTemplate navigation={[]}>
+    <AppTemplate>
       <FastbinEditor
         language="markdown"
         contents={readme}

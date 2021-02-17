@@ -12,7 +12,7 @@ contact me on Telegram: t.me/AaronDewes
 
 const NotFound = () => {
   return (
-    <AppTemplate navigation={[]}>
+    <AppTemplate>
       <FastbinEditor
         language="markdown"
         contents={ERROR_PAGE}
