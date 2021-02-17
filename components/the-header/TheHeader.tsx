@@ -18,32 +18,16 @@ export interface NavigationItem {
 }
 
 export interface TheHeaderProps {
-  items: NavigationItem[];
   displayLanguages?: boolean;
   documentLanguage?: string;
   setDocumentLanguage?(language: string): any;
 }
 
 const TheHeader = ({
-  items,
   displayLanguages,
   documentLanguage,
   setDocumentLanguage
 }: TheHeaderProps) => {
-  const navigationItems = [
-    {
-      url: '/',
-      tooltip: 'New (ctrl+i)',
-      icon: FilePlus
-    },
-    {
-      url: '/about',
-      tooltip: 'About',
-      icon: Info
-    },
-
-    ...items
-  ];
 
   const [ headerClasses, setHeaderClasses ] = useState([ css.wrapper, css.mobileHeader ].join(' '));
   const [ tooltipPlacement, setTooltipPlacement ] = useState<'bottom' | 'top'>('bottom');
@@ -85,24 +69,6 @@ const TheHeader = ({
                 </Select>
               </Col>
             )}
-
-            <Col>
-              {navigationItems.map((item, idx) => (
-                <Tooltip key={idx} text={item.tooltip} placement={tooltipPlacement} className={css.navItem}>
-                  {item.url && !item.external && <Link href={item.url}>
-                    <a>
-                      <item.icon size={36} />
-                    </a>
-                  </Link>}
-
-                  {item.url && item.external && <a href={item.url}>
-                    <item.icon size={36} />
-                  </a>}
-
-                  {item.onClick && <item.icon onClick={item.onClick} size={36} />}
-                </Tooltip>
-              ))}
-            </Col>
           </Row>
         </Col>
       </Row>

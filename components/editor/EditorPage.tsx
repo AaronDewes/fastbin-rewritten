@@ -57,13 +57,6 @@ const EditorPage = ({ contents, languageId }: EditorPageProps) => {
     }
   };
 
-  const navigation: NavigationItem[] = [
-    {
-      onClick: save,
-      tooltip: 'Save (ctrl+s)',
-      icon: Save
-    }
-  ];
 
   useEffect(() => {
     let mounted = true;
@@ -71,9 +64,6 @@ const EditorPage = ({ contents, languageId }: EditorPageProps) => {
 
     Mousetrap.bindGlobal('ctrl+s', e => {
       e.preventDefault();
-      if (mounted) {
-        save();
-      }
     });
 
     return () => {
@@ -84,7 +74,6 @@ const EditorPage = ({ contents, languageId }: EditorPageProps) => {
 
   return (
     <AppTemplate
-      navigation={navigation}
       displayLanguages
       documentLanguage={documentLanguage}
       setDocumentLanguage={setDocumentLanguage}

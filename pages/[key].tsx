@@ -17,20 +17,6 @@ interface DocumentPageProps {
 }
 
 const DocumentPage = ({ contents, finalKey, originalKey, languageId }: DocumentPageProps) => {
-  const navigation: NavigationItem[] = [
-    {
-      tooltip: 'Clone (ctrl+shift+c)',
-      url: `/clone/${originalKey}`,
-      icon: Copy
-    },
-    {
-      tooltip: 'Raw (ctrl+shift+r)',
-      url: `/raw/${finalKey}`,
-      external: true,
-      icon: Code
-    }
-  ];
-
   const router = useRouter();
 
   useEffect(() => {
@@ -38,7 +24,6 @@ const DocumentPage = ({ contents, finalKey, originalKey, languageId }: DocumentP
 
     Mousetrap.bindGlobal('ctrl+shift+c', e => {
       e.preventDefault();
-      router.push(`/clone/${originalKey}`);
     });
 
     Mousetrap.bindGlobal('ctrl+shift+r', e => {
@@ -53,7 +38,7 @@ const DocumentPage = ({ contents, finalKey, originalKey, languageId }: DocumentP
   }, []);
 
   return (
-    <AppTemplate navigation={navigation}>
+    <AppTemplate>
       <FastbinEditor
         language={languageId}
         contents={contents}

@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 import TheHeader, { NavigationItem } from './the-header/TheHeader';
 
 export interface AppTemplateProps {
-  navigation: NavigationItem[];
   displayLanguages?: boolean;
   documentLanguage?: string;
   setDocumentLanguage?(language: string): any;
@@ -10,7 +9,6 @@ export interface AppTemplateProps {
 }
 
 const AppTemplate = ({
-  navigation,
   displayLanguages,
   documentLanguage,
   setDocumentLanguage,
@@ -19,7 +17,6 @@ const AppTemplate = ({
   return (
     <section>
       <TheHeader
-        items={navigation}
         displayLanguages={displayLanguages}
         documentLanguage={documentLanguage}
         setDocumentLanguage={setDocumentLanguage}
