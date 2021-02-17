@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const contents = typeof req.body === 'string'
     ? req.body
-    : req.body && Object.keys(req.body)[0];
+    : req.body && req.body[''];
 
   if (!contents || !contents.length) {
     return res.status(422).json({
