@@ -7,7 +7,7 @@ The requested page/snippet could not be found. Either it was never created, or
 it got deleted from our database. If you're sure the snippet must be here,
 contact me on Telegram: t.me/AaronDewes
 
-* To create a new snippet, press \`ctrl+i\`
+If this is the front page, you can't create a snippet from the web interface.
 `;
 
 const NotFound = () => {
