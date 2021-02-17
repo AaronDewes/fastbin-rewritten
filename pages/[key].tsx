@@ -3,7 +3,7 @@ import { NavigationItem } from '@/components/the-header/TheHeader';
 import env from '@/lib/env';
 import languages from '@/lib/languages';
 import { Copy, Code, Trash2 } from '@geist-ui/react-icons';
-import Editor from '@/components/editor/Editor';
+import FastbinEditor from '@/components/editor/FastbinEditor';
 import Mousetrap from 'mousetrap';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -63,7 +63,7 @@ const DocumentPage = ({ contents, finalKey, originalKey, languageId, secret }: D
 
   return (
     <AppTemplate navigation={navigation}>
-      <Editor
+      <FastbinEditor
         language={languageId}
         contents={contents}
         readOnly

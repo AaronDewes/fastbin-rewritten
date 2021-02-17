@@ -1,5 +1,5 @@
 import AppTemplate from '@/components/AppTemplate';
-import Editor from '@/components/editor/Editor';
+import FastbinEditor from '@/components/editor/FastbinEditor';
 
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -7,7 +7,7 @@ import * as path from 'path';
 const About = ({ readme }: { readme: string }) => {
   return (
     <AppTemplate navigation={[]}>
-      <Editor
+      <FastbinEditor
         language="markdown"
         contents={readme}
         readOnly

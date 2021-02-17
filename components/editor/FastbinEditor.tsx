@@ -10,7 +10,7 @@ export interface EditorOpts {
   setContents?(contents: string): any;
 }
 
-const Editor = ({ contents, readOnly, language, setContents }: EditorOpts) => {
+const FastbinEditor = ({ contents, readOnly, language, setContents }: EditorOpts) => {
   const editorOptions = {
     fontFamily: '"Fira Code", "Consolas", "Courier New", monospace',
     fontLigatures: true,
@@ -50,4 +50,4 @@ const Editor = ({ contents, readOnly, language, setContents }: EditorOpts) => {
   );
 };
 
-export default Editor;
+export default FastbinEditor;

@@ -1,7 +1,7 @@
 import AppTemplate from '@/components/AppTemplate';
 import { NavigationItem } from '@/components/the-header/TheHeader';
 import { Save } from '@geist-ui/react-icons';
-import Editor from '@/components/editor/Editor';
+import FastbinEditor from '@/components/editor/FastbinEditor';
 import React, { useEffect, useRef, useState } from 'react';
 import upload from '@/lib/upload';
 import { useToasts } from '@geist-ui/react';
@@ -94,7 +94,7 @@ const EditorPage = ({ contents, languageId }: EditorPageProps) => {
       documentLanguage={documentLanguage}
       setDocumentLanguage={setDocumentLanguage}
     >
-      <Editor
+      <FastbinEditor
         contents={documentContents.current}
         setContents={setDocumentContents}
         language={documentLanguage}

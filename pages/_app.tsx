@@ -1,8 +1,8 @@
 import { GeistProvider, CssBaseline } from '@geist-ui/react';
 import '@/styles/base.scss';
 
-import { useEffect } from 'react';
-import { monaco } from '@monaco-editor/react';
+import { useEffect, useState } from 'react';
+import { loader } from '@monaco-editor/react';
 import { useRouter } from 'next/router';
 
 import Mousetrap from 'mousetrap';
@@ -17,7 +17,7 @@ const Fastbin = ({ Component, pageProps }) => {
     globalKeyBind(Mousetrap);
     Mousetrap.bindGlobal('ctrl+i', () => router.push('/'));
 
-    monaco.init()
+    loader.init()
       .then(instance => {
         instance.languages.register({ id: 'tsc' });
         instance.languages.setMonarchTokensProvider('tsc', {
@@ -51,8 +51,9 @@ const Fastbin = ({ Component, pageProps }) => {
     };
   }, []);
 
+  const [themeType] = useState('light');
   return (
-    <GeistProvider theme={{ type: 'dark' }}>
+    <GeistProvider themeType={themeType}>
       <CssBaseline />
       <Component {...pageProps} />
 
