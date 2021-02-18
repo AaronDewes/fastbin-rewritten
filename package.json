@@ -10,18 +10,21 @@
     "export": "npm run build && next export"
   },
   "dependencies": {
+    "@firebase/app-types": "^0.6.1",
     "@geist-ui/react": "^2.1.3",
     "@geist-ui/react-icons": "^1.0.1",
+    "@google-cloud/storage": "^5.8.0",
     "@monaco-editor/react": "^4.0.10",
     "aws-sdk": "^2.845.0",
     "cuid": "^2.1.8",
     "firebase-admin": "^9.5.0",
     "fs-extra": "^9.1.0",
     "ismobilejs": "^1.1.1",
+    "monaco-editor": "^0.22.3",
     "mousetrap": "^1.6.5",
     "mousetrap-global-bind": "^1.1.0",
     "next": "10.0.7",
-    "react": "17.0.1",
+    "react": "^17.0.1",
     "react-dom": "17.0.1",
     "sass": "^1.32.7"
   },
@@ -34,5 +37,8 @@
     "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
     "typescript": "^4.1.5"
+  },
+  "resolutions": {
+    "@google-cloud/storage": "^5.8.0"
   }
 }
