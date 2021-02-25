@@ -25,3 +25,7 @@ body {
   font-family: "Fira Code", "Consolas", "Courier New", monospace;
   resize: none;
 }
+
+.react-tabs__tab::before {
+  display: none;
+}
