@@ -55,7 +55,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if(splitContent[1]) {
       await storage.create({ key: key + "1", contents: splitContent[1] });
     } else {
-      await storage.create({ key: key + "1", contents: splitContent[0] });
+      await storage.create({ key: key + "1", contents: "This paste has been generated using an old version of Umbrel (The updated version hasn't been released yet), so this tab isn't available. Please visit the second link of the output instead." });
     }
 
     return res.json({ ok: true, key });

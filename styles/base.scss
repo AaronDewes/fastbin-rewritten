@@ -29,3 +29,19 @@ body {
 .react-tabs__tab::before {
   display: none;
 }
+
+.react-tabs__tab:focus::after {
+  display: none;
+}
+
+.react-tabs__tab-list {
+  margin: 0;
+}
+
+.react-tabs__tab {
+  bottom: 0;
+}
+
+li {
+  margin-bottom: 0;
+}
