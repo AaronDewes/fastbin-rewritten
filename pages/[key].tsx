@@ -40,10 +40,10 @@ const DocumentPage = ({ contents0, contents1, finalKey, originalKey, languageId 
     </TabList>
 
     <TabPanel>
-      <div className="viewer">{contents0}</div>
+      <code className="viewer">{contents0}</code>
     </TabPanel>
     <TabPanel>
-      <div className="viewer">{contents1}</div>
+      <code className="viewer">{contents1}</code>
     </TabPanel>
   </Tabs>
   );

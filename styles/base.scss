@@ -13,15 +13,7 @@ body {
   background: $background-color !important;
 }
 
-.editor {
-  position: fixed !important;
-  top: 50;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-textarea.editor {
+.viewer {
   box-sizing: border-box;
   border: 0;
   background: transparent;
@@ -32,9 +24,4 @@ textarea.editor {
   line-height: 22px;
   font-family: "Fira Code", "Consolas", "Courier New", monospace;
   resize: none;
-
-  @media only screen and ( max-width: 530px ) {
-    top: 0;
-    bottom: 65px;
-  }
 }
