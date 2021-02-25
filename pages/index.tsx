@@ -1,4 +1,3 @@
-import AppTemplate from '@/components/AppTemplate';
 import FastbinEditor from '@/components/editor/FastbinEditor';
 
 const INDEX_PAGE = `# Umbrel debug server
@@ -7,16 +6,14 @@ The server for storing debug logs of Umbrel.
 
 `;
 
-const NotFound = () => {
+const Frontpage = () => {
   return (
-    <AppTemplate>
-      <FastbinEditor
-        language="markdown"
-        contents={INDEX_PAGE}
-        readOnly
-      />
-    </AppTemplate>
+    <FastbinEditor
+      language="markdown"
+      contents={INDEX_PAGE}
+      readOnly
+    />
   );
 };
 
-export default NotFound;
+export default Frontpage;

@@ -1,4 +1,3 @@
-import AppTemplate from '@/components/AppTemplate';
 import FastbinEditor from '@/components/editor/FastbinEditor';
 
 import * as fs from 'fs-extra';
@@ -6,13 +5,11 @@ import * as path from 'path';
 
 const About = ({ readme }: { readme: string }) => {
   return (
-    <AppTemplate>
-      <FastbinEditor
-        language="markdown"
-        contents={readme}
-        readOnly
-      />
-    </AppTemplate>
+    <FastbinEditor
+      language="markdown"
+      contents={readme}
+      readOnly
+    />
   );
 };
 

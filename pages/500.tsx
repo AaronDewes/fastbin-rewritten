@@ -1,4 +1,3 @@
-import AppTemplate from '@/components/AppTemplate';
 import FastbinEditor from '@/components/editor/FastbinEditor';
 
 const ERROR_PAGE = `# Error 500
@@ -10,13 +9,11 @@ contact me on Telegram: t.me/AaronDewes
 
 const InternalServerError = () => {
   return (
-    <AppTemplate>
-      <FastbinEditor
-        language="markdown"
-        contents={ERROR_PAGE}
-        readOnly
-      />
-    </AppTemplate>
+    <FastbinEditor
+      language="markdown"
+      contents={ERROR_PAGE}
+      readOnly
+    />
   );
 };
 

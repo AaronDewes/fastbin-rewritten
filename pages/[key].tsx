@@ -1,4 +1,3 @@
-import AppTemplate from '@/components/AppTemplate';
 import env from '@/lib/env';
 import languages from '@/lib/languages';
 import FastbinEditor from '@/components/editor/FastbinEditor';
@@ -6,23 +5,22 @@ import Mousetrap from 'mousetrap';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import globalKeyBind from '@/lib/globalKeyBind';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 interface DocumentPageProps {
-  contents: string;
+  contents0: string;
+  contents1: string;
   finalKey: string;
   originalKey: string;
   languageId: string;
 }
 
-const DocumentPage = ({ contents, finalKey, originalKey, languageId }: DocumentPageProps) => {
+const DocumentPage = ({ contents0, contents1, finalKey, originalKey, languageId }: DocumentPageProps) => {
   const router = useRouter();
 
   useEffect(() => {
     globalKeyBind(Mousetrap);
-
-    Mousetrap.bindGlobal('ctrl+shift+c', e => {
-      e.preventDefault();
-    });
 
     Mousetrap.bindGlobal('ctrl+shift+r', e => {
       e.preventDefault();
@@ -30,19 +28,24 @@ const DocumentPage = ({ contents, finalKey, originalKey, languageId }: DocumentP
     });
 
     return () => {
-      (Mousetrap as any).unbindGlobal('ctrl+shift+c');
       (Mousetrap as any).unbindGlobal('ctrl+shift+r');
     };
   }, []);
 
   return (
-    <AppTemplate>
-      <FastbinEditor
-        language={languageId}
-        contents={contents}
-        readOnly
-      />
-    </AppTemplate>
+    <Tabs>
+    <TabList>
+      <Tab>Logs</Tab>
+      <Tab>Dmesg</Tab>
+    </TabList>
+
+    <TabPanel>
+      <div className="viewer">{contents0}</div>
+    </TabPanel>
+    <TabPanel>
+      <div className="viewer">{contents1}</div>
+    </TabPanel>
+  </Tabs>
   );
 };
 
@@ -69,7 +72,7 @@ export async function getServerSideProps({ req, res, params }) {
 
   const baseUrl = env('site-url', true);
 
-  const data = await fetch(`${baseUrl}/api/documents/${key}`, {
+  const data = await fetch(`${baseUrl}/api/documents/${key + "0"}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -85,11 +88,30 @@ export async function getServerSideProps({ req, res, params }) {
     };
   }
 
-  const contents = json.contents;
+  const contents0 = json.contents;
+
+  const data1 = await fetch(`${baseUrl}/api/documents/${key + "1"}`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    credentials: 'same-origin'
+  });
+
+  const json1 = await data1.json();
+
+  if (!json1.ok) {
+    return {
+      notFound: true
+    };
+  }
+
+  const contents1 = json1.contents;
 
   return {
     props: {
-      contents,
+      contents0,
+      contents1,
       finalKey: key,
       originalKey,
       languageId

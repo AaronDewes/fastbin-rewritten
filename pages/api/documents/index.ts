@@ -42,6 +42,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  const splitContent = contents.split("=== Umbrel-Paste split ===");
+
   try {
     let key: string | null = null;
 
@@ -49,7 +51,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       key = cuid.slug();
     } while (await storage.exists(key));
 
-    await storage.create({ key, contents });
+    await storage.create({ key: key + "0", contents: splitContent[0] });
+    if(splitContent[1]) {
+      await storage.create({ key: key + "1", contents: splitContent[1] });
+    } else {
+      await storage.create({ key: key + "1", contents: splitContent[0] });
+    }
 
     return res.json({ ok: true, key });
   } catch (err) {
