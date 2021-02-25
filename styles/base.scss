@@ -47,5 +47,5 @@ li {
 }
 
 code::before, code::after {
-  content: '';
+  content: '' !important;
 }
