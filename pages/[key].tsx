@@ -1,6 +1,5 @@
 import env from '@/lib/env';
 import languages from '@/lib/languages';
-import FastbinEditor from '@/components/editor/FastbinEditor';
 import Mousetrap from 'mousetrap';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
