@@ -1,9 +1,6 @@
 import env from '@/lib/env';
 import languages from '@/lib/languages';
-import Mousetrap from 'mousetrap';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import globalKeyBind from '@/lib/globalKeyBind';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {
