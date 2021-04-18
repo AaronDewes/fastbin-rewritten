@@ -1,5 +1,4 @@
 import env from '@/lib/env';
-import languages from '@/lib/languages';
 import { useRouter } from 'next/router';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -55,6 +54,7 @@ export async function getServerSideProps({ req, res, params }) {
   });
 
   const json = await data.json();
+  console.warn(json);
 
   if (!json.ok) {
     return {
