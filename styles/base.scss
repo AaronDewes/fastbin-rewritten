@@ -36,6 +36,8 @@ pre.code {
 
   code {
     counter-increment: listing;
+    display: block;
+    padding: 0.1rem;
   }
 
   code::before {
@@ -45,11 +47,13 @@ pre.code {
     padding-right: 0.5rem;
     margin-left: auto;
     text-align: right;
+    vertical-align: top;
   }
-}
 
-code {
-  display: block;
+  .codeline {
+    width: calc(100% - 4rem);
+    display: inline-block;
+  }
 }
 
 .react-tabs__tab {
