@@ -12,6 +12,8 @@ body {
   // currently a very hacky workaround but it works so I don't care
   background: $background-color !important;
   color: white;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .viewer {
@@ -29,6 +31,7 @@ body {
 
 pre.code {
   white-space: pre-wrap;
+  font-size: 0.9em;
 
   &::before {
     counter-reset: listing;
@@ -37,7 +40,6 @@ pre.code {
   code {
     counter-increment: listing;
     display: block;
-    padding: 0.1rem;
   }
 
   /*code::before {
