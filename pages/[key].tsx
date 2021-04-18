@@ -114,8 +114,8 @@ export async function getServerSideProps({ req, res, params }) {
 
   return {
     props: {
-      items0,
-      items1,
+      contents0: items0,
+      contents1: items1,
       finalKey: key,
       originalKey,
       languageId
