@@ -11,6 +11,7 @@ body {
 
   // currently a very hacky workaround but it works so I don't care
   background: $background-color !important;
+  color: white;
 }
 
 .viewer {
@@ -60,9 +61,13 @@ pre.code {
   code::before {
     content: counter(listing) ". ";
     display: inline-block;
-    width: 8em;         /* now works */
+    width: 4em;         /* now works */
     padding-left: auto; /* now works */
     margin-left: auto;  /* now works */
     text-align: right;  /* now works */
   }
+}
+
+code {
+  display: block;
 }

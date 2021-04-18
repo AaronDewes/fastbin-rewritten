@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@firebase/app-types": "^0.6.2",
-    "@geist-ui/react": "^2.1.5",
-    "@geist-ui/react-icons": "^1.0.1",
     "@google-cloud/storage": "^5.8.3",
     "ansi_up": "^5.0.1",
     "cuid": "^2.1.8",

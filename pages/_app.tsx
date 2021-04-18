@@ -1,4 +1,3 @@
-import { GeistProvider, CssBaseline } from '@geist-ui/react';
 import '@/styles/base.scss';
 
 import { useState } from 'react';
@@ -11,8 +10,7 @@ const Fastbin = ({ Component, pageProps }) => {
 
   const [themeType] = useState('dark');
   return (
-    <GeistProvider themeType={themeType}>
-      <CssBaseline />
+    <div>
       <Component {...pageProps} />
 
       <Head>
@@ -24,7 +22,7 @@ const Fastbin = ({ Component, pageProps }) => {
         <meta name="title" content="Umbrel debug logs server" />
         <meta name="description" content="Umbrel's server for hosting the debug logs of users" />
       </Head>
-    </GeistProvider>
+    </div>
   );
 };
 

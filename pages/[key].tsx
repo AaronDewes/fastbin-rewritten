@@ -7,14 +7,11 @@ import {
   default as AnsiUp
 } from 'ansi_up';
 interface DocumentPageProps {
-  contents0: string;
-  contents1: string;
-  finalKey: string;
-  originalKey: string;
-  languageId: string;
+  contents0: Array<any>;
+  contents1: Array<any>;
 }
 
-const DocumentPage = ({ contents0, contents1, finalKey, originalKey, languageId }: DocumentPageProps) => {
+const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
   const router = useRouter();
 
   return (
@@ -26,12 +23,16 @@ const DocumentPage = ({ contents0, contents1, finalKey, originalKey, languageId 
 
       <TabPanel>
         <pre className="code">
-          {contents0}
+          {contents0.map((value, index) => {
+            return value;
+          })}
         </pre>
       </TabPanel>
       <TabPanel>
         <pre className="code">
-          {contents1}
+          {contents1.map((value, index) => {
+            return value;
+          })}
         </pre>
       </TabPanel>
     </Tabs>

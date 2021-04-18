@@ -6,8 +6,20 @@ contact me on Telegram: t.me/AaronDewes
 `;
 
 const NotFound = () => {
+  const items0 = [];
+
+  for (const value0 of ERROR_PAGE.split("\n")) {
+    items0.push(<code>{value0}</code>);
+  }
+
   return (
-    <code>{ERROR_PAGE}</code>
+    <div>
+      <pre className="code">
+        {items0.map((value, index) => {
+          return value;
+        })}
+      </pre>
+    </div>
   );
 };
 
