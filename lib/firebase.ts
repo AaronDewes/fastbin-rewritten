@@ -3,7 +3,12 @@ import env from './env';
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { Bucket } from '@google-cloud/storage';
+import { Firestore } from '@google-cloud/firestore';
+
+export type UmbrelLog = {
+  logs: string;
+  dmesg: string;
+};
 
 const getCredentials = () => {
   const serviceAccountFilepath = path.join(process.cwd(), '.firebase/credentials.json');
@@ -34,52 +39,34 @@ const initFirebaseStorage = () => {
     });
   }
 
-  const bucket = env('firebase.bucket')?.replace('.appspot.com', '');
-  return firebase.app().storage().bucket(`${bucket}.appspot.com`);
+  return firebase.app().firestore();
 };
 
 class Firebase {
-  private storage: Bucket | null;
+  private storage: Firestore | null;
 
   constructor() {
     this.storage = initFirebaseStorage();
   }
 
-  exists(key): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.storage.file(key).exists()
-        .then(res => resolve(res[0]))
-        .catch(reject);
-    });
+  async exists(key): Promise<boolean> {
+    return !(await this.storage.collection("/" + key).get()).empty;
   }
 
-  upload(key: string, contents: string): Promise<any> {
-    const file = this.storage.file(key);
-
-    return new Promise((resolve, reject) => {
-      file.save(contents, err => {
-        if (err) {
-          return reject(err);
-        }
-
-        return resolve(true);
-      });
-    });
+  async upload(key: string, data: UmbrelLog): Promise<any> {
+    const logDocument = this.storage.doc(`uploads/${key}`);
+    try {
+      logDocument.set({logs: data.logs, dmesg: data.dmesg});
+      return true;
+    } catch {
+      return false;
+    }
   }
 
-  getStream(key: string) {
-    const file = this.storage.file(key);
-    return file.createReadStream();
-  }
-
-  read(key: string): Promise<string> {
-    const file = this.storage.file(key);
-
-    return new Promise((resolve, reject) => {
-      file.download()
-        .then(contents => resolve(contents.toString()))
-        .catch(reject);
-    });
+  async read(key: string): Promise<UmbrelLog> {
+    const logDocument = this.storage.doc(`uploads/${key}`);
+    const data = (await logDocument.get()).data();
+    return {logs: data.logs, dmesg: data.dmesg};
   }
 }
 

@@ -7,11 +7,11 @@ import {
   default as AnsiUp
 } from 'ansi_up';
 interface DocumentPageProps {
-  contents0: string;
-  contents1: string;
+  logs: string;
+  dmesg: string;
 }
 
-const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
+const DocumentPage = ({ logs, dmesg }: DocumentPageProps) => {
   const router = useRouter();
 
   const ansi_up = new AnsiUp();
@@ -25,14 +25,14 @@ const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
 
       <TabPanel>
         <pre className="code">
-          {contents0.split("\n").map((value, index) => {
+          {logs.split("\n").map((value, index) => {
             return <code key={"0" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
           })}
         </pre>
       </TabPanel>
       <TabPanel>
         <pre className="code">
-          {contents1.split("\n").map((value, index) => {
+          {dmesg.split("\n").map((value, index) => {
             return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
           })}
         </pre>
@@ -65,7 +65,7 @@ export async function getServerSideProps({ req, res, params }) {
   // For local testing
   const baseUrl = env('site-url', true) || "http://localhost:3000";
 
-  const data = await fetch(`${baseUrl}/api/documents/${key + "0"}`, {
+  const data = await fetch(`${baseUrl}/api/documents/${key}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -81,30 +81,10 @@ export async function getServerSideProps({ req, res, params }) {
     };
   }
 
-  const contents0 = json.contents;
-
-  const data1 = await fetch(`${baseUrl}/api/documents/${key + "1"}`, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    credentials: 'same-origin'
-  });
-
-  const json1 = await data1.json();
-
-  if (!json1.ok) {
-    return {
-      notFound: true
-    };
-  }
-
-  const contents1 = json1.contents;
-
   return {
     props: {
-      contents0,
-      contents1,
+      logs: json.contents.logs,
+      dmesg: json.contents.dmesg,
       finalKey: key,
       originalKey,
       languageId

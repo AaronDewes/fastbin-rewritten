@@ -1,17 +1,13 @@
-import Firebase from '@/lib/firebase';
+import Firebase, { UmbrelLog } from '@/lib/firebase';
 import IStorageStrategy from './IStorageStrategy';
 
 class FirebaseStorageStrategy implements IStorageStrategy {
-  async create(params) {
-    await new Firebase().upload(params.key, params.contents);
+  async create(key: string, data: UmbrelLog) {
+    await new Firebase().upload(key, data);
   }
 
   async get(key: string) {
     return new Firebase().read(key);
-  }
-
-  getStream(key: string) {
-    return new Firebase().getStream(key);
   }
 
   async exists(key: string) {

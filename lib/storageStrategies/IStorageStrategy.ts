@@ -1,11 +1,7 @@
-interface ICreateParams {
-  key: string;
-  contents: string;
-}
+import { UmbrelLog } from "../firebase";
 
 export default interface IStorageStrategy {
-  create(params: ICreateParams);
-  get(key: string): Promise<string>;
-  getStream(key: string);
+  create(key: string, data: UmbrelLog);
+  get(key: string): Promise<UmbrelLog>;
   exists(key: string): Promise<boolean>;
 }

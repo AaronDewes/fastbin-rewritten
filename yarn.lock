@@ -172,6 +172,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@google-cloud/firestore@npm:^4.9.9":
+  version: 4.9.9
+  resolution: "@google-cloud/firestore@npm:4.9.9"
+  dependencies:
+    fast-deep-equal: ^3.1.1
+    functional-red-black-tree: ^1.0.1
+    google-gax: ^2.9.2
+    protobufjs: ^6.8.6
+  checksum: 29a12db8fe13cc86d1bfa55a7497eef7bbdc03d3d5e270f62a798afc7eaeea9e7439a268e656339b261286a04a92e9f816ae9efb9d9b3946b52ee1f279cc15b1
+  languageName: node
+  linkType: hard
+
 "@google-cloud/paginator@npm:^3.0.0":
   version: 3.0.5
   resolution: "@google-cloud/paginator@npm:3.0.5"
@@ -196,7 +208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@google-cloud/storage@npm:^5.8.3":
+"@google-cloud/storage@npm:^5.3.0":
   version: 5.8.3
   resolution: "@google-cloud/storage@npm:5.8.3"
   dependencies:
@@ -2061,7 +2073,7 @@ __metadata:
   resolution: "fastbin-rewritten@workspace:."
   dependencies:
     "@firebase/app-types": ^0.6.2
-    "@google-cloud/storage": ^5.8.3
+    "@google-cloud/firestore": ^4.9.9
     "@types/fs-extra": ^9.0.11
     "@types/mousetrap": ^1.6.7
     "@types/node": ^14.14.41
