@@ -4,6 +4,9 @@ module.exports = {
   future: {
     webpack5: true,
   },
+  experimental: {
+    optimizeCss: true
+  },
   sassOptions: {
     includePaths: [
       path.join(__dirname, 'styles')
