@@ -11,6 +11,8 @@ const getStorageStrategy = () => {
       return new FileStorageStrategy();
     case 'firebase':
       return new FirebaseStorageStrategy();
+    default:
+      return new FileStorageStrategy();
   }
 };
 

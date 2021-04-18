@@ -7,8 +7,8 @@ import {
   default as AnsiUp
 } from 'ansi_up';
 interface DocumentPageProps {
-  contents0: Array<any>;
-  contents1: Array<any>;
+  contents0: string;
+  contents1: string;
 }
 
 const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
@@ -23,15 +23,15 @@ const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
 
       <TabPanel>
         <pre className="code">
-          {contents0.map((value, index) => {
-            return value;
+          {contents0.split("\n").map((value, index) => {
+            return <code key={"0" + index}>{value}</code>;
           })}
         </pre>
       </TabPanel>
       <TabPanel>
         <pre className="code">
-          {contents1.map((value, index) => {
-            return value;
+          {contents0.split("\n").map((value, index) => {
+            return <code key={"1" + index}>{value}</code>;
           })}
         </pre>
       </TabPanel>
@@ -63,7 +63,8 @@ export async function getServerSideProps({ req, res, params }) {
 
   const ansi_up = new AnsiUp();
 
-  const baseUrl = env('site-url', true);
+  // For local testing
+  const baseUrl = env('site-url', true) || "http://localhost:3000";
 
   const data = await fetch(`${baseUrl}/api/documents/${key + "0"}`, {
     headers: {
@@ -101,22 +102,10 @@ export async function getServerSideProps({ req, res, params }) {
 
   const contents1 = json1.contents;
 
-  const items0 = [];
-
-  for (const value0 of contents0.split("\n")) {
-    items0.push(<code>{ansi_up.ansi_to_html(value0)}</code>);
-  }
-
-  const items1 = [];
-
-  for (const value1 of contents1.split("\n")) {
-    items1.push(<code>{ansi_up.ansi_to_html(value1)}</code>);
-  }
-
   return {
     props: {
-      contents0: items0,
-      contents1: items1,
+      contents0,
+      contents1,
       finalKey: key,
       originalKey,
       languageId

@@ -27,26 +27,6 @@ body {
   resize: none;
 }
 
-.react-tabs__tab::before {
-  display: none;
-}
-
-.react-tabs__tab:focus::after {
-  display: none;
-}
-
-.react-tabs__tab-list {
-  margin: 0;
-}
-
-.react-tabs__tab {
-  bottom: 0;
-}
-
-li {
-  margin-bottom: 0 !important;
-}
-
 pre.code {
   white-space: pre-wrap;
 
@@ -70,4 +50,8 @@ pre.code {
 
 code {
   display: block;
+}
+
+.react-tabs__tab {
+  padding: 0.75rem 2rem;
 }
