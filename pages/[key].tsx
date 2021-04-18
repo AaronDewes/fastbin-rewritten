@@ -20,19 +20,6 @@ interface DocumentPageProps {
 const DocumentPage = ({ contents0, contents1, finalKey, originalKey, languageId }: DocumentPageProps) => {
   const router = useRouter();
 
-  useEffect(() => {
-    globalKeyBind(Mousetrap);
-
-    Mousetrap.bindGlobal('ctrl+shift+r', e => {
-      e.preventDefault();
-      window.location.href = `/raw/${finalKey}`;
-    });
-
-    return () => {
-      (Mousetrap as any).unbindGlobal('ctrl+shift+r');
-    };
-  }, []);
-
   return (
     <Tabs>
       <TabList>
