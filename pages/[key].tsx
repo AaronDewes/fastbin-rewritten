@@ -44,28 +44,9 @@ const DocumentPage = ({ logs, dmesg }: DocumentPageProps) => {
 export default DocumentPage;
 
 export async function getServerSideProps({ req, res, params }) {
-  let key = params.key;
-  let originalKey = key;
+  const baseUrl = env('site-url', true);
 
-  let languageId = 'plain';
-
-  const components = key.split('.');
-  if (components.length > 1) {
-    const extension = components.pop();
-    key = components.join('.');
-
-    const targetLanguage = Object.values(languages)
-      .find(l => l.extension === extension);
-
-    if (targetLanguage) {
-      languageId = targetLanguage.id;
-    }
-  }
-
-  // For local testing
-  const baseUrl = env('site-url', true) || "http://localhost:3000";
-
-  const data = await fetch(`${baseUrl}/api/documents/${key}`, {
+  const data = await fetch(`${baseUrl}/api/documents/${params.key}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -84,10 +65,7 @@ export async function getServerSideProps({ req, res, params }) {
   return {
     props: {
       logs: json.contents.logs,
-      dmesg: json.contents.dmesg,
-      finalKey: key,
-      originalKey,
-      languageId
+      dmesg: json.contents.dmesg
     }
   };
 };

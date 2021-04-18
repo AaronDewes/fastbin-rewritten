@@ -28,15 +28,5 @@ module.exports = {
         destination: '/api/documents/:key/raw'
       }
     ]
-  },
-
-  async redirects() {
-    return [
-      {
-        source: '/languages/:language',
-        destination: '/?language=:language',
-        permanent: true
-      }
-    ]
   }
 };
