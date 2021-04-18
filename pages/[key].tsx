@@ -32,7 +32,7 @@ const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
       </TabPanel>
       <TabPanel>
         <pre className="code">
-          {contents0.split("\n").map((value, index) => {
+          {contents1.split("\n").map((value, index) => {
             return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
           })}
         </pre>
