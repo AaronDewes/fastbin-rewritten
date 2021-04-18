@@ -44,7 +44,7 @@ export default DocumentPage;
 
 export async function getServerSideProps({ req, res, params }) {
   const baseUrl = env('site-url', true);
-
+  console.warn(`${baseUrl}api/documents/${params.key}`);
   const data = await fetch(`${baseUrl}api/documents/${params.key}`, {
     headers: {
       Accept: 'application/json',
