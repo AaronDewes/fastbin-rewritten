@@ -46,6 +46,23 @@ li {
   margin-bottom: 0 !important;
 }
 
-code::before, code::after {
-  content: '' !important;
+pre.code {
+  white-space: pre-wrap;
+
+  &::before {
+    counter-reset: listing;
+  }
+
+  code {
+    counter-increment: listing;
+  }
+
+  code::before {
+    content: counter(listing) ". ";
+    display: inline-block;
+    width: 8em;         /* now works */
+    padding-left: auto; /* now works */
+    margin-left: auto;  /* now works */
+    text-align: right;  /* now works */
+  }
 }

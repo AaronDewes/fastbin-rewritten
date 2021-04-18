@@ -10,36 +10,35 @@
     "export": "npm run build && next export"
   },
   "dependencies": {
-    "@firebase/app-types": "^0.6.1",
-    "@geist-ui/react": "^2.1.3",
+    "@firebase/app-types": "^0.6.2",
+    "@geist-ui/react": "^2.1.5",
     "@geist-ui/react-icons": "^1.0.1",
-    "@google-cloud/storage": "^5.8.0",
-    "@monaco-editor/react": "^4.0.10",
-    "aws-sdk": "^2.851.0",
+    "@google-cloud/storage": "^5.8.3",
+    "ansi_up": "^5.0.1",
+    "aws-sdk": "^2.888.0",
     "cuid": "^2.1.8",
-    "firebase-admin": "^9.5.0",
+    "firebase-admin": "^9.6.0",
     "fs-extra": "^9.1.0",
     "ismobilejs": "^1.1.1",
-    "monaco-editor": "^0.22.3",
     "mousetrap": "^1.6.5",
     "mousetrap-global-bind": "^1.1.0",
-    "next": "10.0.7",
-    "react": "^17.0.1",
-    "react-dom": "17.0.1",
-    "react-tabs": "^3.2.0",
-    "sass": "^1.32.8"
+    "next": "10.1.3",
+    "react": "^17.0.2",
+    "react-dom": "17.0.2",
+    "react-tabs": "^3.2.2",
+    "sass": "^1.32.10"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.7",
-    "@types/mousetrap": "^1.6.5",
-    "@types/node": "^14.14.31",
-    "@types/react": "^17.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
-    "eslint": "^7.20.0",
-    "typescript": "^4.2.2"
+    "@types/fs-extra": "^9.0.11",
+    "@types/mousetrap": "^1.6.7",
+    "@types/node": "^14.14.41",
+    "@types/react": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "typescript": "^4.2.4"
   },
   "resolutions": {
-    "@google-cloud/storage": "^5.8.0"
+    "@google-cloud/storage": "^5.8.3"
   }
 }

@@ -6,7 +6,9 @@ import { useEffect } from 'react';
 import globalKeyBind from '@/lib/globalKeyBind';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-
+import {
+  default as AnsiUp
+} from 'ansi_up';
 interface DocumentPageProps {
   contents0: string;
   contents1: string;
@@ -33,18 +35,22 @@ const DocumentPage = ({ contents0, contents1, finalKey, originalKey, languageId 
 
   return (
     <Tabs>
-    <TabList>
-      <Tab>Logs</Tab>
-      <Tab>Dmesg</Tab>
-    </TabList>
+      <TabList>
+        <Tab>Logs</Tab>
+        <Tab>Dmesg</Tab>
+      </TabList>
 
-    <TabPanel>
-      <code className="viewer">{contents0}</code>
-    </TabPanel>
-    <TabPanel>
-      <code className="viewer">{contents1}</code>
-    </TabPanel>
-  </Tabs>
+      <TabPanel>
+        <pre className="code">
+          {contents0}
+        </pre>
+      </TabPanel>
+      <TabPanel>
+        <pre className="code">
+          {contents1}
+        </pre>
+      </TabPanel>
+    </Tabs>
   );
 };
 
@@ -68,6 +74,9 @@ export async function getServerSideProps({ req, res, params }) {
       languageId = targetLanguage.id;
     }
   }
+
+
+  const ansi_up = new AnsiUp();
 
   const baseUrl = env('site-url', true);
 
@@ -107,10 +116,22 @@ export async function getServerSideProps({ req, res, params }) {
 
   const contents1 = json1.contents;
 
+  const items0 = [];
+
+  for (const value0 of contents0.split("\n")) {
+    items0.push(<code>{ansi_up.ansi_to_html(value0)}</code>);
+  }
+
+  const items1 = [];
+
+  for (const value1 of contents1.split("\n")) {
+    items1.push(<code>{ansi_up.ansi_to_html(value1)}</code>);
+  }
+
   return {
     props: {
-      contents0,
-      contents1,
+      items0,
+      items1,
       finalKey: key,
       originalKey,
       languageId
