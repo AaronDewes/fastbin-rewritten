@@ -14,6 +14,8 @@ interface DocumentPageProps {
 const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
   const router = useRouter();
 
+  const ansi_up = new AnsiUp();
+
   return (
     <Tabs>
       <TabList>
@@ -24,14 +26,14 @@ const DocumentPage = ({ contents0, contents1 }: DocumentPageProps) => {
       <TabPanel>
         <pre className="code">
           {contents0.split("\n").map((value, index) => {
-            return <code key={"0" + index}>{value}</code>;
+            return <code key={"0" + index}>{ansi_up.ansi_to_html(value)}</code>;
           })}
         </pre>
       </TabPanel>
       <TabPanel>
         <pre className="code">
           {contents0.split("\n").map((value, index) => {
-            return <code key={"1" + index}>{value}</code>;
+            return <code key={"1" + index}>{ansi_up.ansi_to_html(value)}</code>;
           })}
         </pre>
       </TabPanel>
@@ -59,9 +61,6 @@ export async function getServerSideProps({ req, res, params }) {
       languageId = targetLanguage.id;
     }
   }
-
-
-  const ansi_up = new AnsiUp();
 
   // For local testing
   const baseUrl = env('site-url', true) || "http://localhost:3000";
