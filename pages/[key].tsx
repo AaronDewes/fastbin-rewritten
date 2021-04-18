@@ -44,8 +44,8 @@ export default DocumentPage;
 
 export async function getServerSideProps({ req, res, params }) {
   const baseUrl = env('vercel-url', false);
-  console.log(`${baseUrl}api/documents/${params.key}`);
-  const data = await fetch(`${baseUrl}api/documents/${params.key}`, {
+  console.log(`${baseUrl}/api/documents/${params.key}`);
+  const data = await fetch(`${baseUrl}/api/documents/${params.key}`, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
