@@ -13,9 +13,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  res.writeHead(200, {
-    'Content-Type': 'text/plain'
-  });
   const contents = await storage.get(key);
   res.send([contents.logs, contents.dmesg].join("\n\”"));
 };
