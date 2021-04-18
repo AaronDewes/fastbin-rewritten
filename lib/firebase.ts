@@ -50,7 +50,7 @@ class Firebase {
   }
 
   async exists(key): Promise<boolean> {
-    return !(await this.storage.collection("uploads/" + key).get()).empty;
+    return (await this.storage.doc(`uploads/${key}`).get()).exists;
   }
 
   async upload(key: string, data: UmbrelLog): Promise<any> {
