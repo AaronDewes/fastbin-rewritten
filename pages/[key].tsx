@@ -54,7 +54,7 @@ export async function getServerSideProps({ req, res, params }) {
   });
 
   const json = await data.json();
-  console.warn(json);
+  console.warn(`${baseUrl}/api/documents/${params.key}`);
 
   if (!json.ok) {
     return {
