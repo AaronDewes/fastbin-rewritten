@@ -1,7 +1,7 @@
 import env from '@/lib/env';
 import { getStorageStrategy } from '@/lib/storageStrategies';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+const torDetect = require('tor-detect');
 
 const randOf = (collection) => {
   return () => {
@@ -43,6 +43,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
+  const ipAddress = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
+  const isTor = await torDetect(ipAddress);
+
   const contents = typeof req.body === 'string'
     ? req.body
     : req.body && req.body[''];
@@ -73,9 +77,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } while (await storage.exists(key));
 
     if(splitContent[1]) {
-      await storage.create(key, {logs: splitContent[0], dmesg: splitContent[1]});
+      await storage.create(key, {logs: splitContent[0], dmesg: splitContent[1]}, isTor);
     } else {
-      await storage.create(key, {logs: splitContent[0], dmesg: "This paste has been generated using an old version of Umbrel, so this tab isn't available. Please visit the second link of the output instead." });
+      await storage.create(key, {logs: splitContent[0], dmesg: "This paste has been generated using an old version of Umbrel, so this tab isn't available. Please visit the second link of the output instead." }, isTor);
     }
 
     return res.json({ ok: true, key });
