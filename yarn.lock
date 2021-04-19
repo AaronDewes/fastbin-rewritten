@@ -1658,13 +1658,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cuid@npm:^2.1.8":
-  version: 2.1.8
-  resolution: "cuid@npm:2.1.8"
-  checksum: 78c802152be85714e02b0ade15b95d6a298f547dc6f6429fa5ed26fdf0b14379260cec808521711633a9462c718f3f89c7cd97b5a66e26781f65cd213792f720
-  languageName: node
-  linkType: hard
-
 "dashdash@npm:^1.12.0":
   version: 1.14.1
   resolution: "dashdash@npm:1.14.1"
@@ -2240,7 +2233,6 @@ __metadata:
     ansi_up: ^5.0.1
     console-browserify: ^1.2.0
     critters: ^0.0.10
-    cuid: ^2.1.8
     eslint: ^7.24.0
     firebase-admin: ^9.6.0
     next: 10.1.3

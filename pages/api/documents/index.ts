@@ -2,7 +2,28 @@ import env from '@/lib/env';
 import { getStorageStrategy } from '@/lib/storageStrategies';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import cuid from 'cuid';
+
+const randOf = (collection) => {
+  return () => {
+    return collection[Math.floor(Math.random() * collection.length)];
+  };
+};
+
+// Helper methods to get an random vowel or consonant
+const randVowel = randOf('aeiou');
+const randConsonant = randOf('bcdfghjklmnpqrstvwxyz');
+
+function createKey(keyLength) {
+  let text = '';
+  const start = Math.round(Math.random());
+
+  for (let i = 0; i < keyLength; i++) {
+    text += (i % 2 === start) ? randConsonant() : randVowel();
+  }
+
+  return text;
+}
+
 
 const storage = getStorageStrategy();
 
@@ -48,7 +69,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     let key: string | null = null;
 
     do {
-      key = cuid.slug();
+      key = createKey(7);
     } while (await storage.exists(key));
 
     if(splitContent[1]) {
