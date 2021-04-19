@@ -5,13 +5,16 @@ import { useRouter } from 'next/router';
 
 import Head from 'next/head';
 
-const Fastbin = ({ Component, pageProps }) => {
-  const router = useRouter();
 
-  const [themeType] = useState('dark');
+import { init } from '../utils/sentry';
+
+init();
+
+export default function UmbrelDebug({ Component, pageProps, err }) {
+  const router = useRouter();
   return (
     <div>
-      <Component {...pageProps} />
+      <Component {...pageProps}  err={err} />
 
       <Head>
         <title>Umbrel debug logs</title>
@@ -26,4 +29,3 @@ const Fastbin = ({ Component, pageProps }) => {
   );
 };
 
-export default Fastbin;
