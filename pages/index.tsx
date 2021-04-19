@@ -1,7 +1,6 @@
 const INDEX_PAGE = `# Umbrel debug server
 
 The server for storing debug logs of Umbrel.
-
 `;
 
 const Frontpage = () => {

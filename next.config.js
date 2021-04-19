@@ -63,13 +63,12 @@ module.exports = {
       SENTRY_ORG &&
       SENTRY_PROJECT &&
       SENTRY_AUTH_TOKEN &&
-      VERCEL_GIT_COMMIT_SHA &&
-      NODE_ENV === 'production'
+      VERCEL_GIT_COMMIT_SHA
     ) {
       config.plugins.push(
         new SentryWebpackPlugin({
           include: '.next',
-          ignore: ['node_modules'],
+          ignore: ['node_modules', ".yarn", "yarn.lock"],
           stripPrefix: ['webpack://_N_E/'],
           urlPrefix: `~${basePath}/_next`,
           release: VERCEL_GIT_COMMIT_SHA,

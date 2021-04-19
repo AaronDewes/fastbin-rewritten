@@ -6,16 +6,16 @@ const storage = getStorageStrategy();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const key = req.query.key as string;
 
-  if (!(await storage.exists(key))) {
+  try {
+    const contents = await storage.get(key);
+    return res.json({
+      ok: true,
+      contents
+    });
+  } catch {
     return res.status(404).json({
       ok: false,
       error: 'File does not exist.'
     });
   }
-
-  const contents = await storage.get(key);
-  return res.json({
-    ok: true,
-    contents
-  });
 };
