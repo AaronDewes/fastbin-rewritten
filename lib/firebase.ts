@@ -63,6 +63,16 @@ class Firebase {
     }
   }
 
+  async delete(key: string): Promise<any> {
+    const logDocument = this.storage.doc(`uploads/${key}`);
+    try {
+      logDocument.delete();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async read(key: string): Promise<UmbrelLog> {
     const logDocument = this.storage.doc(`uploads/${key}`);
     const data = (await logDocument.get()).data();

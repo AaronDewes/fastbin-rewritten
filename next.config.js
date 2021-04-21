@@ -103,6 +103,10 @@ module.exports = {
       {
         source: '/raw/:key',
         destination: '/api/documents/:key/raw'
+      },
+      {
+        source: '/delete/:key',
+        destination: '/api/documents/:key/delete'
       }
     ]
   }
