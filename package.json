@@ -25,7 +25,8 @@
     "react-dom": "17.0.2",
     "react-tabs": "^3.2.2",
     "sass": "^1.32.11",
-    "tor-detect": "^1.0.7"
+    "tor-detect": "^1.0.7",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.41",
