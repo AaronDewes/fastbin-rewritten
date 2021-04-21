@@ -43,7 +43,8 @@ const DocumentPage = ({ logs, dmesg }: DocumentPageProps) => {
 export default DocumentPage;
 
 export async function getServerSideProps({ req, res, params }) {
-  const baseUrl = env('vercel-url', false);
+  // For the tor version
+  const baseUrl = env('vercel-url', false) || "http://localhost:8080";
   const data = await fetch(`https://${baseUrl}/api/documents/${params.key}`, {
     headers: {
       Accept: 'application/json',
