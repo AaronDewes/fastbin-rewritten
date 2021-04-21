@@ -42,7 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     };
   }
 
-  if (!contents || !contents.length) {
+  if (!contents || !contents.logs.length) {
     return res.status(422).json({
       ok: false,
       error: 'Contents is too short.'
