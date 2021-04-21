@@ -26,9 +26,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const isTor = await torDetect(ipAddress);
 
-  const contents = typeof req.body === 'string'
-    ? req.body
-    : req.body && req.body[''];
+  let contents: Record<string, string>;
+  
+  if(typeof req.body === 'string') {
+    contents = {
+      logs: req.body.split("=== Umbrel-Paste split ===")[0],
+      dmesg: req.body.split("=== Umbrel-Paste split ===")[1] || "This paste has been generated using an old version of Umbrel, so this tab isn't available. Please visit the second link of the output instead."
+    };
+  } else if(req.body.logs && req.body.dmesg) {
+    contents = req.body;
+  } else {
+    contents = {
+      logs: JSON.stringify(req.body),
+      dmesg: ""
+    };
+  }
 
   if (!contents || !contents.length) {
     return res.status(422).json({
@@ -39,14 +51,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const maxLength = parseInt(env('limits.max-body-length'), 10);
 
-  if (contents.length > maxLength) {
+  if ((contents.dmesg.length + contents.logs.length) > maxLength) {
     return res.status(422).json({
       ok: false,
       error: `Your snippet needs to be less than ${maxLength} characters long.`
     });
   }
-
-  const splitContent = contents.split("=== Umbrel-Paste split ===");
 
   try {
     let key: string | null = null;
@@ -55,11 +65,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       key = v4();
     } while (await storage.exists(key));
 
-    if(splitContent[1]) {
-      await storage.create(key, {logs: splitContent[0], dmesg: splitContent[1]}, isTor);
-    } else {
-      await storage.create(key, {logs: splitContent[0], dmesg: "This paste has been generated using an old version of Umbrel, so this tab isn't available. Please visit the second link of the output instead." }, isTor);
-    }
+    await storage.create(key, {logs: contents.logs, dmesg: contents.dmesg}, isTor);
 
     return res.json({ ok: true, key });
   } catch (err) {
