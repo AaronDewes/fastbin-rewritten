@@ -53,10 +53,10 @@ class Firebase {
     return (await this.storage.doc(`uploads/${key}`).get()).exists;
   }
 
-  async upload(key: string, data: UmbrelLog, isTor: boolean): Promise<any> {
+  async upload(key: string, data: UmbrelLog): Promise<any> {
     const logDocument = this.storage.doc(`uploads/${key}`);
     try {
-      logDocument.set({logs: data.logs, dmesg: data.dmesg, tor: isTor});
+      logDocument.set({logs: data.logs, dmesg: data.dmesg});
       return true;
     } catch {
       return false;

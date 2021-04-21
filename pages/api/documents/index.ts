@@ -1,7 +1,6 @@
 import env from '@/lib/env';
 import { getStorageStrategy } from '@/lib/storageStrategies';
 import { NextApiRequest, NextApiResponse } from 'next';
-const torDetect = require('tor-detect');
 import { v4 } from 'uuid';
 
 const storage = getStorageStrategy();
@@ -21,10 +20,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       error: 'Method not allowed.'
     });
   }
-
-  const ipAddress = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-
-  const isTor = await torDetect(ipAddress);
 
   let contents: Record<string, string>;
   
@@ -65,7 +60,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       key = v4();
     } while (await storage.exists(key));
 
-    await storage.create(key, {logs: contents.logs, dmesg: contents.dmesg}, isTor);
+    await storage.create(key, {logs: contents.logs, dmesg: contents.dmesg});
 
     return res.json({ ok: true, key });
   } catch (err) {
