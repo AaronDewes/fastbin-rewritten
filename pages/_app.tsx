@@ -1,14 +1,8 @@
 import '@/styles/base.scss';
 
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Head from 'next/head';
-
-
-import { init } from '../utils/sentry';
-
-init();
 
 export default function UmbrelDebug({ Component, pageProps, err }) {
   const router = useRouter();

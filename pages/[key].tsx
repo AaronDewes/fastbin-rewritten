@@ -8,9 +8,10 @@ import {
 interface DocumentPageProps {
   logs: string;
   dmesg: string;
+  apps: string;
 }
 
-const DocumentPage = ({ logs, dmesg }: DocumentPageProps) => {
+const DocumentPage = ({ logs, apps, dmesg }: DocumentPageProps) => {
   const router = useRouter();
 
   const ansi_up = new AnsiUp();
@@ -20,6 +21,7 @@ const DocumentPage = ({ logs, dmesg }: DocumentPageProps) => {
       <TabList>
         <Tab>Logs</Tab>
         <Tab>Dmesg</Tab>
+        <Tab>Apps</Tab>
       </TabList>
 
       <TabPanel>
@@ -32,6 +34,13 @@ const DocumentPage = ({ logs, dmesg }: DocumentPageProps) => {
       <TabPanel>
         <pre className="code">
           {dmesg.split("\n").map((value, index) => {
+            return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
+          })}
+        </pre>
+      </TabPanel>
+      <TabPanel>
+        <pre className="code">
+          {apps.split("\n").map((value, index) => {
             return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
           })}
         </pre>
@@ -63,8 +72,9 @@ export async function getServerSideProps({ req, res, params }) {
 
   return {
     props: {
-      logs: json.contents.logs,
-      dmesg: json.contents.dmesg
+      logs: json.main,
+      apps: json.apps,
+      dmesg: json.dmesg
     }
   };
 };

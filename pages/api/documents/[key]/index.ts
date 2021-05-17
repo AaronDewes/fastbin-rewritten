@@ -1,21 +1,18 @@
-import { getStorageStrategy } from '@/lib/storageStrategies';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-const storage = getStorageStrategy();
+import fetch from 'node-fetch';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const key = req.query.key as string;
 
-  try {
-    const contents = await storage.get(key);
-    return res.json({
-      ok: true,
-      contents
-    });
-  } catch {
-    return res.status(404).json({
-      ok: false,
-      error: 'File does not exist.'
-    });
-  }
+  const data = await fetch(`https://api.debug.umbrel.tech/api/read`, {
+    method: 'POST',
+    body: JSON.stringify({
+      key
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const response = await data.json();
+  res.json({ ok: true, ...response });
 };
