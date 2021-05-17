@@ -29,8 +29,15 @@ function parseContent(content: string): ParsedLogs {
   }
 
   parsed.dmesg = contentSplitAtDmesg[1].trim();
-  parsed.main = contentSplitAtAppLogs[0].trim();
-  parsed.apps = contentSplitAtAppLogs[1] ? contentSplitAtAppLogs[1].trim() : "This upload has been done on the legacy server, so app logs aren't available.";
+
+  if(contentSplitAtAppLogs[1]) {
+    const result = contentSplitAtAppLogs[1].split("================\n==== Result ====\n================");
+    parsed.main = contentSplitAtAppLogs[0].trim() + "\n\n================\n==== Result ====\n================" + result[1];
+    parsed.apps = result[0];
+  } else {
+    parsed.main = contentSplitAtAppLogs[0].trim();
+    parsed.apps = "This upload has been using an outdated Umbrel version, so app logs aren't available.";
+  }
   return parsed;
 }
 
