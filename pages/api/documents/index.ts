@@ -84,5 +84,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const response = await data.json();
 
 
-  return res.json({ ok: true, key: response.logKey });
+  return res.json({ ok: true, key: response.key });
 };
