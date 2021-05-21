@@ -21,6 +21,7 @@ const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
 
 
   const handleLoad = (name, variant) => {
+    console.log(variant);
     if (variant.name === "UI v3") {
       router.push(`https://v3.debug.umbrel.tech/${key}`);
     }
