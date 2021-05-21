@@ -11,10 +11,10 @@ interface DocumentPageProps {
   logs: string;
   dmesg: string;
   apps: string;
-  key: string;
+  logkey: string;
 }
 
-const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
+const DocumentPage = ({ logs, apps, dmesg, logkey }: DocumentPageProps) => {
   const router = useRouter();
 
   const ansi_up = new AnsiUp();
@@ -59,7 +59,8 @@ const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
           </TabPanel>
         </Tabs>
       </Variant>
-      <Variant name={key}>
+      <Variant name={logkey}>
+        <div></div>
       </Variant>
     </Experiment>
   );
@@ -70,28 +71,25 @@ export default DocumentPage;
 export async function getServerSideProps({ req, res, params }) {
   // For the tor version
   const baseUrl = env('vercel-url', false) || "http://localhost:8080";
-  const data = await fetch(`https://${baseUrl}/api/documents/${params.key}`, {
+
+  const data = await fetch(`https://api.debug.umbrel.tech/api/read`, {
+    method: 'POST',
+    body: JSON.stringify({
+      key: params.key
+    }),
     headers: {
-      Accept: 'application/json',
       'Content-Type': 'application/json'
-    },
-    credentials: 'same-origin'
+    }
   });
 
   const json = await data.json();
-
-  if (!json.ok) {
-    return {
-      notFound: true
-    };
-  }
 
   return {
     props: {
       logs: json.main,
       apps: json.apps,
       dmesg: json.dmesg,
-      key: params.key
+      logkey: params.key
     }
   };
 };
