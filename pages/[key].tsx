@@ -6,7 +6,6 @@ import {
   default as AnsiUp
 } from 'ansi_up';
 import { Experiment, Variant } from "@tstmkrs/nextjs-ab-test";
-import { Redirect } from 'react-router';
 
 interface DocumentPageProps {
   logs: string;
@@ -20,8 +19,15 @@ const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
 
   const ansi_up = new AnsiUp();
 
+
+  const handleLoad = (name, variant) => {
+    if (variant.name === "UI v3") {
+      router.push(`https://v3.debug.umbrel.tech/${key}`);
+    }
+  };
+
   return (
-    <Experiment name="Different UIs" weights={[90, 10]}>
+    <Experiment name="Different UIs" weights={[90, 10]} onExperimentLoaded={handleLoad}>
       <Variant name="Legacy UI">
         <Tabs>
           <TabList>
@@ -54,7 +60,6 @@ const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
         </Tabs>
       </Variant>
       <Variant name="UI v3">
-        <Redirect to={`https://v3.debug.umbrel.tech/${key}`}></Redirect>
       </Variant>
     </Experiment>
   );
