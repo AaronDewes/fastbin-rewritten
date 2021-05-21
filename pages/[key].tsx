@@ -5,47 +5,58 @@ import 'react-tabs/style/react-tabs.css';
 import {
   default as AnsiUp
 } from 'ansi_up';
+import { Experiment, Variant } from "@tstmkrs/nextjs-ab-test";
+import { Redirect } from 'react-router';
+
 interface DocumentPageProps {
   logs: string;
   dmesg: string;
   apps: string;
+  key: string;
 }
 
-const DocumentPage = ({ logs, apps, dmesg }: DocumentPageProps) => {
+const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
   const router = useRouter();
 
   const ansi_up = new AnsiUp();
 
   return (
-    <Tabs>
-      <TabList>
-        <Tab>Logs</Tab>
-        <Tab>Dmesg</Tab>
-        <Tab>Apps</Tab>
-      </TabList>
+    <Experiment name="Different UIs" weights={[90, 10]}>
+      <Variant name="Legacy UI">
+        <Tabs>
+          <TabList>
+            <Tab>Logs</Tab>
+            <Tab>Dmesg</Tab>
+            <Tab>Apps</Tab>
+          </TabList>
 
-      <TabPanel>
-        <pre className="code">
-          {logs.split("\n").map((value, index) => {
-            return <code key={"0" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
-          })}
-        </pre>
-      </TabPanel>
-      <TabPanel>
-        <pre className="code">
-          {dmesg.split("\n").map((value, index) => {
-            return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
-          })}
-        </pre>
-      </TabPanel>
-      <TabPanel>
-        <pre className="code">
-          {apps.split("\n").map((value, index) => {
-            return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
-          })}
-        </pre>
-      </TabPanel>
-    </Tabs>
+          <TabPanel>
+            <pre className="code">
+              {logs.split("\n").map((value, index) => {
+                return <code key={"0" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
+              })}
+            </pre>
+          </TabPanel>
+          <TabPanel>
+            <pre className="code">
+              {dmesg.split("\n").map((value, index) => {
+                return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
+              })}
+            </pre>
+          </TabPanel>
+          <TabPanel>
+            <pre className="code">
+              {apps.split("\n").map((value, index) => {
+                return <code key={"1" + index} dangerouslySetInnerHTML={{ __html: `<span class="codeline"> ${ansi_up.ansi_to_html(value)}</span>` }}></code>;
+              })}
+            </pre>
+          </TabPanel>
+        </Tabs>
+      </Variant>
+      <Variant name="UI v3">
+        <Redirect to={`https://v3.debug.umbrel.tech/${key}`}></Redirect>
+      </Variant>
+    </Experiment>
   );
 };
 
@@ -74,7 +85,8 @@ export async function getServerSideProps({ req, res, params }) {
     props: {
       logs: json.main,
       apps: json.apps,
-      dmesg: json.dmesg
+      dmesg: json.dmesg,
+      key: params.key
     }
   };
 };
