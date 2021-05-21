@@ -21,8 +21,8 @@ const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
 
 
   const handleLoad = (name, variant) => {
-    if (variant === "UI v3") {
-      router.push(`https://v3.debug.umbrel.tech/${key}`);
+    if (variant !== "Legacy UI") {
+      router.push(`https://v3.debug.umbrel.tech/${variant}`);
     }
   };
 
@@ -59,7 +59,7 @@ const DocumentPage = ({ logs, apps, dmesg, key }: DocumentPageProps) => {
           </TabPanel>
         </Tabs>
       </Variant>
-      <Variant name="UI v3">
+      <Variant name={key}>
       </Variant>
     </Experiment>
   );
